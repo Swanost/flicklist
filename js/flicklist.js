@@ -45,35 +45,33 @@ function discoverMovies(callback) {
 function render() {
   // TODO 7
   // clear everything from both lists
-  // $(watchItem).empty();
-  // $(browseItem).empty();
+  $("#section-watchlist ul").empty();
+  $("#section-browse ul").empty();
   
   // TODO 6
   // for each movie on the user's watchlist, insert a list item into the <ul> in the watchlist section
   model.watchlistItems.forEach(function(movie) {
-		var watchItem = $("<li></li>").html('<p>' + movie.title + "</p>");
-		$("#section-watchlist ul").append(watchItem);
+		var item = $("<li></li>").html('<p>' + movie.title + "</p>");
+		$("#section-watchlist ul").append(item);
   });
   
   // for each movie on the current browse list, 
   model.browseItems.forEach(function(movie) {
 		// TODO 3
 		// insert a list item into the <ul> in the browse section
-		var listItem = $("<li></li>").html('<p>' + movie.title + "</p>");
-		$("#section-browse ul").append(listItem);
+		var item = $("<li></li>").html('<p>' + movie.title + "</p>");
+		$("#section-browse ul").append(item);
 		
 		
 		// TODO 4
 		// the list item should include a button that says "Add to Watchlist"
 		var myButton = $("<button></button>").text("Add to Watchlist");
-		$(listItem).append(myButton);
+		$(item).append(myButton);
 		
 		// TODO 5
 		// when the button is clicked, this movie should be added to the model's watchlist and render() should be called again
 		myButton.click(function() {
-  		$(model.watchlistItems).insertAfter(movie.title);
-  		console.log('The movie is ' + movie.title);
- 		console.log(model.watchlistItems);
+			model.watchlistItems.push(movie);
   		render();
 		});
   });
